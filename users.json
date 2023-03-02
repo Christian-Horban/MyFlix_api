@@ -1,0 +1,4 @@
+{"_id":{"$oid":"63f6cf6ceb5d474f734a2eff"},"Name":"Skye","ID":"2","Birthday":{"$date":"1995-06-20T00:00:00Z"},"FavoriteMovie":{"_id":{"$oid":"63f54a95eb5d474f734a2ef7"}},"Username":"Skye22","Password":"test2","Email":"skye@yahoo.com"}
+{"_id":{"$oid":"63f6d106eb5d474f734a2f00"},"Name":"Reilo","ID":"3","Birthday":{"$date":"2019-07-09T00:00:00Z"},"FavoriteMovie":{" _id":{"$oid":"63f6c04eeb5d474f734a2efc"}},"Username":"Reilo19","Password":"test3","Email":"reilo@gmail.com"}
+{"_id":{"$oid":"63f6d3f6eb5d474f734a2f01"},"Name":"Akela","ID":"4","Birthday":{"$date":"2016-11-07T00:00:00Z"},"FavoriteMovie":{"_id":{"$oid":"63f69acceb5d474f734a2efa"}},"Username":"Akela11","Password":"test4","Email":"akela@yahoo.com"}
+{"_id":{"$oid":"63f6d4bdeb5d474f734a2f02"},"Name":"Miley","ID":"5","Birthday":{"$date":"2012-05-12T00:00:00Z"},"FavoriteMovie":{"id_":{"$oid":"63f69f32eb5d474f734a2efb"}},"Username":"Miley","Password":"test5","Email":"miley@aol.com"}
