@@ -9,10 +9,13 @@ const Models = require('./models');
 
 const Movies = Models.Movie;
 const Users = Models.User;
+
+/*
 const Genres = Models.Genre;
 const Directors = Modules.Director;
+*/
 
-mongoose.connect('mongodb://localhost:8080/[movie', { 
+mongoose.connect('mongodb://localhost:27017/[movie', { 
   useNewUrlParser: true, 
   useUnifiedTopology: true 
 });
