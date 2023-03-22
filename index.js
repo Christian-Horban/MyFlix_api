@@ -23,13 +23,13 @@ mongoose.connect('mongodb://localhost:27017/[movie', {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-app.use(morgan('common'));
-
 let auth = require('./auth')(app);
 
 const passport = require('passport');
 require('./passport');
+
+app.use(morgan('common'));
+
 
 // default text response 
 app.get('/', (request, response) => {
@@ -91,7 +91,7 @@ app.get('/director/:Name', passport.authenticate('jwt', { session: false }), (re
 
 
 // Get all users
-app.get('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.get('/users', (req, res) => {
   Users.find()
   .then((users) => {
     res.status(201).json(users);
@@ -127,9 +127,12 @@ Birthday: Date
 
 
 //CREATE
-app.post('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.post('/users', (req, res) => {
+  console.log(req.body)
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
+
+      console.log (user)
       if (user) {
         return res.status(400).send(req.body.Username + 'already exists');
             } else {
