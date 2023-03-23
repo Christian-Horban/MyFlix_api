@@ -28,9 +28,6 @@ let Director = mongoose.model('Director', movieSchema);
 let Genre = mongoose.model('Genre', movieSchema);
 let User = mongoose.model('User', userSchema);
 
-module.exports.Movie = Movie;
-module.exports.User = User;
-
 userSchema.statics.hashPassword = (password) => {
     return bcrypt.hashSync(password, 10);
   };
@@ -38,4 +35,9 @@ userSchema.statics.hashPassword = (password) => {
   userSchema.methods.validatePassword = function(password) {
     return bcrypt.compareSync(password, this.Password);
   };
+
+module.exports.Movie = Movie;
+module.exports.User = User;
+
+
 
