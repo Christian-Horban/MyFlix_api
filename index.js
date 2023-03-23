@@ -215,48 +215,48 @@ app.post('/users', (req, res) => {
 //   }
 // );
 
-// //UPDATE
-// app.put(
-//   '/users/:Username',
-//   [
-//     check('Username', 'Username is required').isLength({ min: 5 }),
-//     check(
-//       'Username',
-//       'Username contains non alphanumeric characters - not allowed.'
-//     ).isAlphanumeric(),
-//     check('Password', 'Password is required').not().isEmpty(),
-//     check('Email', 'Email does not appear to be valid').isEmail(),
-//   ],
-//   passport.authenticate('jwt', { session: false }),
-//   (req, res) => {
-//     let errors = validationResult(req);
+//UPDATE
+app.put(
+  '/users/:Username',
+  [
+    check('Username', 'Username is required').isLength({ min: 5 }),
+    check(
+      'Username',
+      'Username contains non alphanumeric characters - not allowed.'
+    ).isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail(),
+  ],
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    let errors = validationResult(req);
 
-//     if (!errors.isEmpty()) {
-//       return res.status(422).json({ errors: errors.array() });
-//     }
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
 
-//     let hashedPassword = Users.hashPassword(req.body.Password);
-//     Users.findOneAndUpdate(
-//       { Username: req.params.Username },
-//       {
-//         $set: {
-//           Username: req.body.Username,
-//           Password: hashedPassword,
-//           Email: req.body.Email,
-//           Birthday: req.body.Birthday,
-//         },
-//       },
-//       { new: true }
-//     )
-//       .then((updatedUser) => {
-//         res.status(200).json(updatedUser);
-//       })
-//       .catch((err) => {
-//         console.error(err);
-//         res.status(500).send('Error: ' + err);
-//       });
-//   }
-// );
+    let hashedPassword = Users.hashPassword(req.body.Password);
+    Users.findOneAndUpdate(
+      { Username: req.params.Username },
+      {
+        $set: {
+          Username: req.body.Username,
+          Password: hashedPassword,
+          Email: req.body.Email,
+          Birthday: req.body.Birthday,
+        },
+      },
+      { new: true }
+    )
+      .then((updatedUser) => {
+        res.status(200).json(updatedUser);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send('Error: ' + err);
+      });
+  }
+);
 
 
 //DELETE
