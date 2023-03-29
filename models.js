@@ -22,15 +22,15 @@ let userSchema = mongoose.Schema( {
     Birthday: Date,
     FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Movie" }]
 });
+userSchema.statics.hashPassword = (password) => {
+    return bcrypt.hashSync(password, 10);
+}
 
 let Movie = mongoose.model('Movie', movieSchema);
 let Director = mongoose.model('Director', movieSchema);
 let Genre = mongoose.model('Genre', movieSchema);
 let User = mongoose.model('User', userSchema);
 
-userSchema.statics.hashPassword = (password) => {
-    return bcrypt.hashSync(password, 10);
-}
 // userSchema.statics.hashPassword = (password) => {
 //     return bcrypt.hashSync(password, 10);
 //   };
