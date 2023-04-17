@@ -34,6 +34,7 @@
   },
   "description": "",
   "devDependencies": {
+    "@types/cors": "^2.8.13",
     "@types/morgan": "^1.9.4",
     "@types/passport": "^1.0.12",
     "@types/passport-jwt": "^3.0.8",
