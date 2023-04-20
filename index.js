@@ -41,8 +41,8 @@ app.use(cors({
     }
     return callback(null, true);
   }
-}),
-put.catch( e => console.log(e))
+})
+.catch( e => console.log(e))
 );
 
 let auth = require('./auth')(app);
