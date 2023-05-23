@@ -28,11 +28,11 @@ mongoose.connect( process.env.CONNECTION_URI, {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//const cors = require('cors');
+const cors = require('cors');
 //  let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', 'https://git.heroku.com/horban-movie-api.git', "https://myflix-horban.netlify.app"];
 //  methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'];
 
-//app.use(cors());
+app.use(cors());
   // origin: (origin, callback) => {
   //   if (!origin) return callback(null, true);
   //   if (allowedOrigins.indexOf(origin) === -1) {
