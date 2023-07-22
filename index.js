@@ -1,9 +1,7 @@
 const express = require('express'),
-  bodyParser = require('body-parser'),
-  uuid = require('uuid');
+  bodyParser = require('body-parser')
 
 const morgan = require('morgan');
-const app = express();
 const mongoose = require('mongoose');
 const Models = require('./models');
 
@@ -15,39 +13,43 @@ const Genres = Models.Genre;
 const Directors = Modules.Director;
 */
 
-mongoose.connect( process.env.CONNECTION_URI, { 
-  useNewUrlParser: true, 
-  useUnifiedTopology: true 
+mongoose.connect("mongodb://0.0.0.0:27017/[movie",{ 
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
+
+const app = express();
+app.use(express.static('public'));
+app.use(morgan('common'));
+
+
 
 // mongoose.connect('mongodb://localhost:27017/[movie', { 
 //   useNewUrlParser: true, 
 //   useUnifiedTopology: true 
 // });
 
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const cors = require('cors');
-//  let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', 'https://git.heroku.com/horban-movie-api.git', "https://myflix-horban.netlify.app"];
+  let allowedOrigins = ['http://localhost:8080', /*'http://localhost:1234', 'https://git.heroku.com/horban-movie-api.git', "https://myflix-horban.netlify.app"*/];
 //  methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'];
 
-app.use(cors());
-  // origin: (origin, callback) => {
-  //   if (!origin) return callback(null, true);
-  //   if (allowedOrigins.indexOf(origin) === -1) {
-  //     let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
-  //     return callback(new Error(message), false);
-  //   }
-  //   return callback(null, true);
-  // };
+app.use(cors({
+  origin: (origin, callback) => {
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin)===-1) {
+      let message = 'The CORS policy for this application doesn\'t allow access from origin ' + origin;
+      return callback(new Error(message),false);
+    }
+    return callback(null, true);
+  }
+}));
 
 let auth = require('./auth')(app);
 
 const passport = require('passport');
 require('./passport');
-
-app.use(morgan('common'));
 
 const { check, validationResult } = require('express-validator');
 
@@ -258,24 +260,17 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
 });
 
 
-app.use(express.static('public'));
-app.use(morgan('common'));
 
 // GET requests
-app.get('/', (req, res) => {
-  res.send('Welcome to my Movie API site!');
-});
 
 app.get('/documentation', (req, res) => {                  
   res.sendFile('public/documentation.html', { root: __dirname });
 });
 
-app.get('/movies', (req, res) => {
-  res.json(topMovies);
-});
-
-app.get('/secreturl', (req, res) => {
-  res.send('This is a secret url with super top-secret content.');
+//Handling Errors
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Oh, something went worng. Please try again later.");
 });
 
 // listen for requests
@@ -284,8 +279,3 @@ app.listen(port, '0.0.0.0',() => {
  console.log('Listening on Port ' + port);
 });
 
-//Handling Errors
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send("Oh, something went worng. Please try again later.");
-});
