@@ -31,9 +31,12 @@ app.use(morgan('common'));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const cors = require('cors');
-  let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', /*'https://git.heroku.com/horban-movie-api.git', "https://myflix-horban.netlify.app"*/];
-//  methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'];
+const cors = require("cors");
+app.use(cors());
+
+// const cors = require('cors');
+//   let allowedOrigins = ['http://localhost:8080', 'http://localhost:1234', /*'https://git.heroku.com/horban-movie-api.git', "https://myflix-horban.netlify.app"*/];
+// //  methods: ['GET','POST','DELETE','UPDATE','PUT','PATCH'];
 
 app.use(cors({
   origin: (origin, callback) => {
