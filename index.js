@@ -13,10 +13,15 @@ const Genres = Models.Genre;
 const Directors = Modules.Director;
 */
 
-mongoose.connect("mongodb://0.0.0.0:27017/[movie",{ 
+mongoose.connect("horban-movie-api.herokuapp.com/",{ 
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
+// mongoose.connect("mongodb://0.0.0.0:27017/[movie",{ 
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
 
 const app = express();
 app.use(express.static('public'));
