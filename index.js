@@ -13,7 +13,7 @@ const Genres = Models.Genre;
 const Directors = Modules.Director;
 */
 
-mongoose.connect("horban-movie-api.herokuapp.com/",{ 
+mongoose.connect("mongodb://horban-movie-api.herokuapp.com/",{ 
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
