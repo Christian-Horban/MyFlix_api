@@ -13,7 +13,7 @@ const Genres = Models.Genre;
 const Directors = Modules.Director;
 */
 
-mongoose.connect("mongodb://horban-movie-api.herokuapp.com/",{ 
+mongoose.connect("mongodb+srv://myFlixAdmin:NewPort831@myflixdb.1iarcgk.mongodb.net/myFlixDB?retryWrites=true&w=majority",{ 
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
