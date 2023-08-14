@@ -13,9 +13,11 @@ const Genres = Models.Genre;
 const Directors = Modules.Director;
 */
 
-mongoose.connect("mongodb+srv://myFlixAdmin:NewPort831@myflixdb.1iarcgk.mongodb.net/myFlixDB?retryWrites=true&w=majority",{ 
+mongoose.connect("mongodb+srv://xian831:NewPort831@myflixdb.1iarcgk.mongodb.net/myFlixDB?retryWrites=true&w=majority",{ 
   useNewUrlParser: true,
   useUnifiedTopology: true,
+}).catch((err) => {
+  console.log("DB Connection Error: ", err);
 });
 
 // mongoose.connect("mongodb://0.0.0.0:27017/[movie",{ 
