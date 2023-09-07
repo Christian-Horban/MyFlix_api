@@ -243,7 +243,7 @@ app.put(
 
 // Allow users to add a movie to their list of top movies
 app.post(
-  '/users/:Username/FavoriteMovies/:movieId',
+  '/users/:Username/FavoriteMovies/:movieid',
   passport.authenticate('jwt', {session: false}),
   (req, res) => {
     const {Username, movieid: movieId} = req.params;
@@ -278,7 +278,7 @@ app.post(
 
 // Allow users to remove a movie from their list of top movies
 app.delete(
-  '/users/:Username/FavoriteMovies/:movieId',
+  '/users/:Username/FavoriteMovies/:movieid',
   passport.authenticate('jwt', {session: false}),
   (req, res) => {
     const {Username, movieid: movieId} = req.params;
