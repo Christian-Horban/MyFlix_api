@@ -258,8 +258,8 @@ app.post(
   '/users/:Username/FavoriteMovies/:movieid',
   passport.authenticate('jwt', {session: false}),
   (req, res) => {
-    const {Username, movieid: movieId} = req.params;
-    Users.findOne({Username: Username, FavoriteMovies: movieId})
+    const {Username, movieid: movie_Id} = req.params;
+    Users.findOne({Username: Username, FavoriteMovies: movie_Id})
       .then((movieIsPresent) => {
         if (movieIsPresent) {
           return res.status(409).send('Movie is already on your list.');
@@ -267,7 +267,7 @@ app.post(
 
         Users.findOneAndUpdate(
           {Username: Username},
-          {$addToSet: {FavoriteMovies: movieId}},
+          {$addToSet: {FavoriteMovies: movie_Id}},
           {new: true}
         )
           .then((updatedUser) => {
@@ -293,8 +293,8 @@ app.delete(
   '/users/:Username/FavoriteMovies/:movieid',
   passport.authenticate('jwt', {session: false}),
   (req, res) => {
-    const {Username, movieid: movieId} = req.params;
-    Users.findOne({Username: Username, FavoriteMovies: movieId})
+    const {Username, movieid: movie_Id} = req.params;
+    Users.findOne({Username: Username, FavoriteMovies: movie_Id})
       .then((movieIsPresent) => {
         if (!movieIsPresent) {
           return res.status(409).send('Movie is not in your list.');
@@ -302,7 +302,7 @@ app.delete(
 
         Users.findOneAndUpdate(
           {Username: Username},
-          {$pull: {FavoriteMovies: movieId}},
+          {$pull: {FavoriteMovies: movie_Id}},
           {new: true}
         )
           .then((updatedUser) => {
