@@ -148,18 +148,6 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }), (r
   });
 });
 
-
-//CREATE
-/*{
-ID: Integer,
-Username: String,
-Password: String,
-Email: String, 
-Birthday: Date
-}*/
-
-
-
 //CREATE
 
 app.post(
@@ -255,7 +243,7 @@ app.put(
 
 // Allow users to add a movie to their list of top movies
 app.post(
-  '/users/:Username/FavoriteMovies/:movieid',
+  '/users/:Username/FavoriteMovies/:movie_id',
   passport.authenticate('jwt', {session: false}),
   (req, res) => {
     const {Username, movieid: movieId} = req.params;
@@ -290,7 +278,7 @@ app.post(
 
 // Allow users to remove a movie from their list of top movies
 app.delete(
-  '/users/:Username/FavoriteMovies/:movieid',
+  '/users/:Username/FavoriteMovies/:movie_id',
   passport.authenticate('jwt', {session: false}),
   (req, res) => {
     const {Username, movieid: movieId} = req.params;
