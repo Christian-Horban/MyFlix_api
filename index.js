@@ -253,6 +253,76 @@ app.put(
   }
 );
 
+// Allow users to add a movie to their list of top movies
+app.post(
+  '/users/:Username/FavoriteMovies/:movieid',
+  passport.authenticate('jwt', {session: false}),
+  (req, res) => {
+    const {Username, movieid: movieId} = req.params;
+    Users.findOne({Username: Username, FavoriteMovies: movieId})
+      .then((movieIsPresent) => {
+        if (movieIsPresent) {
+          return res.status(409).send('Movie is already on your list.');
+        }
+
+        Users.findOneAndUpdate(
+          {Username: Username},
+          {$addToSet: {FavoriteMovies: movieId}},
+          {new: true}
+        )
+          .then((updatedUser) => {
+            res.status(200).json({
+              message: 'Movie was successfully added',
+              user: updatedUser,
+            });
+          })
+          .catch((error) => {
+            console.error(error);
+            res.status(500).send(`Error: '${error}`);
+          });
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send(`Error: ${error}`);
+      });
+  }
+);
+
+// Allow users to remove a movie from their list of top movies
+app.delete(
+  '/users/:Username/FavoriteMovies/:movieid',
+  passport.authenticate('jwt', {session: false}),
+  (req, res) => {
+    const {Username, movieid: movieId} = req.params;
+    Users.findOne({Username: Username, FavoriteMovies: movieId})
+      .then((movieIsPresent) => {
+        if (!movieIsPresent) {
+          return res.status(409).send('Movie is not in your list.');
+        }
+
+        Users.findOneAndUpdate(
+          {Username: Username},
+          {$pull: {FavoriteMovies: movieId}},
+          {new: true}
+        )
+          .then((updatedUser) => {
+            res.status(200).json({
+              message: 'Movie was successfully removed',
+              user: updatedUser,
+            });
+          })
+          .catch((error) => {
+            console.error(error);
+            res.status(500).send(`Error: ${error}`);
+          });
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send(`Error: ${error}`);
+      });
+  }
+);
+
 
 //DELETE
 app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
