@@ -285,7 +285,7 @@ app.delete(
     Users.findOne({Username: Username, FavoriteMovies: movieId})
       .then((movieIsPresent) => {
         if (!movieIsPresent) {
-          return res.status(409).send('Movie is not in your list.');
+          return res.status(200).send('Movie is not in your list.');
         }
 
         Users.findOneAndUpdate(
