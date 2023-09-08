@@ -250,7 +250,7 @@ app.post(
     Users.findOne({Username: Username, FavoriteMovies: movieId})
       .then((movieIsPresent) => {
         if (movieIsPresent) {
-          return res.status(200).send('Movie is already on your list.');
+          return res.status(200).send("Movie is already on your list.");
         }
 
         Users.findOneAndUpdate(
