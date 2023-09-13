@@ -207,7 +207,7 @@ app.put(
       'Username',
       'Username contains non alphanumeric characters - not allowed.'
     ).isAlphanumeric(),
-  //   check('Password', 'Password is required').not().isEmpty(),
+    check('Password', 'Password is required').not().isEmpty(),
   //   // check('Email', 'Email does not appear to be valid').isEmail(),
   ],
   passport.authenticate('jwt', { session: false }),
